@@ -1,0 +1,1970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emissor xmlns="http://www.tn3.com.br/emissor">
+    <extensoes>
+        <biblioteca key="pl006">/home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-pl006/target/nfexmlbeans-pl006-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="pl008">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-pl008/target/nfexmlbeans-pl008-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="plevcanc">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-plevcanc/target/nfexmlbeans-plevcanc-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="plevcc">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-plevcc/target/nfexmlbeans-plevcc-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="plevepec">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-plevepec/target/nfexmlbeans-plevepec-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="plevepecnfce">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-plevepec-nfce/target/nfexmlbeans-plevepecnfce-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="pldpec">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-pldpec/target/nfexmlbeans-pldpec-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="web-padrao">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfecxf/nfecxf-padrao/target/nfecxf-padrao-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="web-parana">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfecxf/nfecxf-parana/target/nfecxf-parana-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="web-padrao4">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfecxf/nfecxf-padrao4/target/nfecxf-padrao4-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="pl009">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfexml/nfexmlbeans-pl009/target/nfexmlbeans-pl009-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="web-bahia4">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfecxf/nfecxf-bahia/target/nfecxf-bahia-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="web-mt4">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfecxf/nfecxf-mt4/target/nfecxf-mt4-8.1.5-SNAPSHOT.jar</biblioteca>
+        <biblioteca key="web-svan4">file:///home/tmenegaz/workspace/NFe/aplicacao/nfecliente/nfecxf/nfecxf-svan4/target/nfecxf-svan4-8.1.5-SNAPSHOT.jar</biblioteca>
+    </extensoes>
+    <configuracao>
+        <propriedade key="aplicacao-nome">TN3 NFE - TESTE</propriedade>
+        <propriedade key="aplicacao-mail">suporte@tn3.com.br</propriedade>
+        <propriedade key="monitor">true</propriedade>
+        <propriedade key="porta">9207</propriedade>
+        <propriedade key="recover">false</propriedade>
+        <propriedade key="licuso-ws">http://licenca.tn3.com.br:8080/licuso/licencaUsoTN3</propriedade>
+        <propriedade key="licuso-email-from">envio@tn3.com.br</propriedade>
+        <propriedade key="licuso-email-to">tmenegaz@tn3.com.br</propriedade>
+        <propriedade key="count-proces-utilizar">true</propriedade>
+        <propriedade key="count-proces-max">10</propriedade>
+        <propriedade key="erro-http-interromper-proces">false</propriedade>
+        <!-- interrompe o processo caso ocorra erro de http. o padrao da aplicação é true -->
+        <propriedade key="erro-http-email-from">envio@tn3.com.br</propriedade>
+        <propriedade key="erro-http-email-to">tmenegaz@tn3.com.br</propriedade>
+        <propriedade key="erro-http-tempo-notif">60</propriedade> <!-- tempo em minutos -->
+        <propriedade key="time-zone">-03:00</propriedade>
+
+        <propriedade key="con-conv-driver">com.mysql.jdbc.Driver</propriedade>
+        <propriedade key="con-conv-url">jdbc:mysql://localhost:3306/nfe_72_?useUnicode=true&amp;characterEncoding=utf-8
+        </propriedade>
+        <!--propriedade key = "con-conv-url">jdbc:mysql://localhost:3306/nfe_72_?useUnicode=true&amp;characterEncoding=utf-8</propriedade-->
+        <propriedade key="con-conv-usuario">root</propriedade>
+        <propriedade key="con-conv-senha">tn3</propriedade>
+        <propriedade key="con-conv-concat-path">C:</propriedade>
+
+    </configuracao>
+    <monitoramento ativo="false" frequencia="300">
+        <e-mails>
+            <e-mail id="tiago">tmenegaz@tn3.com.br</e-mail>
+        </e-mails>
+    </monitoramento>
+    <diretorios>
+        <diretorio key="configuracao">conf</diretorio>
+        <diretorio key="filiais">filiais</diretorio>
+        <diretorio key="certificados">certificados</diretorio>
+        <diretorio key="scanners">scanners</diretorio>
+    </diretorios>
+    
+    <fluxos>
+        <fluxo Id="envio" ativo="true" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-scannfe">
+                    <classe>com.tn3.nfeemissor.job.ScanXmlJob</classe> 
+                    <propriedades>
+                        <propriedade key="entrada">diretorioEntrada</propriedade>
+                        <propriedade key="saida">diretorioEntradaProcessado</propriedade>
+                        <propriedade key="erro">diretorioErro</propriedade>
+						<propriedade key="removerIndentacao">true</propriedade>												
+						<propriedade key="reimprimirAutorizado">true</propriedade>							
+						<propriedade key="gerar-integracao-erro-schema">true</propriedade>
+						<propriedade key="gerar-integracao-erro-schema-mod2">true</propriedade>
+						<propriedade key="verificarTipoIntegracaoFilial">false</propriedade>						
+						<propriedade key="quebrarLote">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+                <!--atividade Id="atv-scannfe">
+                    <classe>com.tn3.nfeemissor.job.ScanNFeTxtJob</classe>
+                    <propriedades>
+                        <propriedade key="entrada">diretorioEntrada</propriedade>
+                        <propriedade key="saida">diretorioEntradaProcessado</propriedade>
+                        <propriedade key="erro">diretorioErro</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+                <atividade Id="atv-scanevento-txt">
+                    <classe>com.tn3.nfeemissor.job.ScanEventoTxtJob</classe>
+                    <propriedades>
+                        <propriedade key="entrada">diretorioEntradaEvento</propriedade>
+                        <propriedade key="saida">diretorioEntradaEventoProcessado</propriedade>
+                        <propriedade key="erro">diretorioErroEvento</propriedade>	
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade-->	
+				
+				<atividade Id = "atv-scanevento-db">
+                    <classe>com.tn3.nfeemissor.job.ScanEventoDbJob</classe>
+                    <propriedades>
+                        <propriedade key = "query">  
+							select e from EventoReq as e 
+							join e.filial as f 
+							where e.processado = false 
+							and f.ativo = true 
+							and f.id =:ownerid 
+							and f.processamentoAtivo = true 
+							and f.uf = (select u from UF as u, Ambiente as a where a.uf = u  and a.ativo = true and f.uf = u and f.cfgTipoAmbiente = a.tipo) 												
+						</propriedade>			
+                        <propriedade key = "quantidade">1</propriedade>
+                        <propriedade key = "classe">com.tn3.nfecore.modelo.EventoReq</propriedade>
+                        <propriedade key = "flag">processado</propriedade>
+                        <propriedade key = "id">id</propriedade>
+						<propriedade key = "usa-xml">true</propriedade>
+						<propriedade key = "removerIndentacao">true</propriedade>
+                    </propriedades>
+                     <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>		
+				
+                <!--atividade Id="atv-scannfe-reenvio">  
+                    <classe>com.tn3.nfeemissor.job.ScanNFeReenvioDbJob</classe>
+                    <propriedades>
+                        <propriedade key="query">select n from NFe as n join n.controle as ctr join
+                            n.filial as f where ctr.reenvio = true and ctr.contingencia = false and f.ativo = true and f.id
+                            =:ownerid and f.processamentoAtivo = true
+							and (ctr.dhUltimoEnvio IS NULL or :data > ctr.dhUltimoEnvio)
+							</propriedade>
+                        <propriedade key="quantidade">1</propriedade>                        
+                        <propriedade key="flag">controle.reenvio</propriedade>  
+						<propriedade key="tempo">180000</propriedade>       
+						<propriedade key="removerIndentacao">true</propriedade>
+						<propriedade key="usa-xml">true</propriedade>
+						<propriedade key="capacidade">2</propriedade>						
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>	
+						
+				<atividade Id = "atv-scaninutilizacao">
+                    <classe>com.tn3.nfeemissor.job.ScanInutilizacaoDbJob</classe>
+                    <propriedades>
+                        <propriedade key = "query">select i from InutilizacaoReq as i join i.filial as f 
+                        where i.processado = false and f.ativo = true and f.id =:ownerid and f.processamentoAtivo = true</propriedade>
+                        <propriedade key = "quantidade">1</propriedade>
+                        <propriedade key = "classe">com.tn3.nfecore.modelo.InutilizacaoReq</propriedade>
+                        <propriedade key = "flag">processado</propriedade>
+                        <propriedade key = "id">id</propriedade>
+                    </propriedades>
+                     <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+				
+                <atividade Id = "atv-scaninutilizacao-reenvio">
+                    <classe>com.tn3.nfeemissor.job.ScanInutilizacaoDbJob</classe>
+                    <propriedades>
+                        <propriedade key = "query">select i from InutilizacaoReq as i join i.filial as f 
+													where i.reenvio = true 
+													and f.ativo = true 
+													and f.id =:ownerid 
+													and f.processamentoAtivo = true
+													and f.uf = (select u from UF as u, Ambiente as a where a.uf = u  and a.tipoEmissao = '1' and a.ativo = true and f.uf = u and f.cfgTipoAmbiente = a.tipo)
+
+						</propriedade>
+                        <propriedade key = "quantidade">1</propriedade>
+                        <propriedade key = "classe">com.tn3.nfecore.modelo.InutilizacaoReq</propriedade>
+                        <propriedade key = "flag">reenvio</propriedade>
+                        <propriedade key = "id">id</propriedade>
+                    </propriedades>
+                     <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>						
+	
+			<atividade Id = "atv-scanevento-reenvio">
+                    <classe>com.tn3.nfeemissor.job.ScanEventoReenvioDbJob</classe>
+                    <propriedades>
+                        <propriedade key = "query">  
+							select e from EventoReq as e 
+							join e.filial as f 
+							where e.reenvio = true 
+							and f.ativo = true 
+							and f.id =:ownerid 
+							and f.processamentoAtivo = true 
+							and f.uf = (select u from UF as u, Ambiente as a where a.uf = u  and a.ativo = true and f.uf = u and f.cfgTipoAmbiente = a.tipo) 	
+							and (e.dhUltimoEnvio IS NULL or :data > e.dhUltimoEnvio)							
+						</propriedade>			
+                        <propriedade key = "quantidade">5</propriedade>
+                        <propriedade key = "tempo">180000</propriedade>
+                        <propriedade key = "flag">reenvio</propriedade>
+                        <propriedade key = "id">id</propriedade>
+						<propriedade key = "usa-xml">true</propriedade>
+						<propriedade key = "removerIndentacao">true</propriedade>
+                    </propriedades>
+                     <programacao tipo="simples">
+                        <valor>30000</valor>
+                    </programacao>
+                </atividade-->
+
+                <atividade Id="atv-contingencia">
+                    <classe>com.tn3.nfeemissor.job.ContingenciaJob</classe>
+                    <propriedades>
+                        <!--propriedade key="versao-dpec"></propriedade>
+						<propriedade key="versao-epec"></propriedade-->
+                        <propriedade key="utiliza-dpec">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <!--atividade Id="atv-dpec">
+                    <classe>com.tn3.nfeemissor.job.DpecJob</classe>
+                    <propriedades>
+                        <propriedade key="timeout">30000</propriedade>
+                        <propriedade key="max">25</propriedade>						
+                    </propriedades>
+                    <programacao tipo="unico"/>
+                </atividade-->
+
+                <atividade Id="atv-xml">
+                    <classe>com.tn3.nfeemissor.job.XmlJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-lote">
+                    <classe>com.tn3.nfeemissor.job.LoteJob</classe>
+                    <propriedades>
+                        <propriedade key="timeout">3000</propriedade>
+                        <propriedade key="max">3</propriedade>
+                        <propriedade key="timeoutEvento">3000</propriedade>
+                        <propriedade key="maxEvento">3</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-envio">
+                    <classe>com.tn3.nfeemissor.job.LoteEnvioJob</classe>
+                    <propriedades>
+                        <propriedade key="integracao">true</propriedade>
+                        <propriedade key="integracaoTxt">true</propriedade>
+                        <propriedade key="integraEvento">true</propriedade>
+                        <propriedade key="integraEventoIndividual">true</propriedade>
+                        <propriedade key="verificarTipoIntegracaoFilial">false</propriedade>
+                        <!--propriedade key="integraCancelamento">true</propriedade-->
+                        <propriedade key="integraInutilizacao">true</propriedade>
+                        <propriedade key="integraInutilizacaoTxt">true</propriedade>
+                        <propriedade key="saveRetLote">true</propriedade>
+                        <!--propriedade key="removerIdStrIntegraInut">true</propriedade-->
+                        <propriedade key="saveEvento">true</propriedade>
+                        <propriedade key="integraEventoTxt">true</propriedade>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                        <!--propriedade key="trocar-corgao-evento-svc">true</propriedade>
+						<propriedade key="integraEventoBdExterno">false</propriedade-->
+                        <propriedade key="saveInutilizacao">true</propriedade>
+                        <!--propriedade key="integraCancelamentoTxt">true</propriedade>						
+						<propriedade key="integraCancelamentoBdExterno">true</propriedade>
+						<propriedade key="integraInutilizacaoBdExterno">true</propriedade-->
+                        <!--propriedade key="timeout">0</propriedade-->
+                        <!-- setando 0 não espera para fazer a consulta ao lote -->
+                        <!--propriedade key="setarReenvioRej999">true</propriedade-->
+                        <!-- seta reenvio caso ocorra rejeição 999. o  padrão da aplicação é false -->
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-lotecons">
+                    <classe>com.tn3.nfeemissor.job.LoteConsultaJob</classe>
+                    <propriedades>
+                        <propriedade key="erro">diretorioErro</propriedade>
+                        <propriedade key="integracao">true</propriedade>
+                        <propriedade key="integraIndividual">false</propriedade>
+                        <propriedade key="reconsultaUltimoRetry">true</propriedade>
+                        <propriedade key="notificarFimTentativas">true</propriedade>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                        <propriedade key="integracaoTxt">true</propriedade>
+                        <propriedade key="verificarTipoIntegracaoFilial">false</propriedade>
+                        <!--propriedade key="integracaoBdExterno">true</propriedade-->
+                        <!--propriedade key="setarReconsultaRej539">true</propriedade-->
+                        <!--propriedade key="setarReconsultaRej999">true</propriedade-->
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-armazena">
+                    <classe>com.tn3.nfeemissor.job.ArmazenaJob</classe>
+                    <propriedades>
+                        <!--propriedade key="usarXmlBeansSave">false</propriedade-->
+                        <propriedade key="armazenaArqBinario">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-copiaxmldist-integracao">
+                    <classe>com.tn3.nfeemissor.job.CopiaXmlDistToIntegracaoJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-report">
+                    <classe>com.tn3.nfeemissor.job.ReportJob</classe>
+                    <propriedades>
+                        <!--propriedade key="integraContingenciaMod1">false</propriedade-->
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-transfer">
+                    <classe>com.tn3.nfeemissor.job.TransferJob</classe>
+                    <propriedades>
+                        <!--propriedade key="cc-verifica-prop-transfer">false</propriedade-->
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-transfer-cotriba">
+                    <classe>com.tn3.nfeemissor.job.TransferCotribaJob</classe>
+                    <propriedades>
+                        <propriedade key="cc-verifica-prop-transfer">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-print">
+                    <classe>com.tn3.nfeemissor.job.PrintJob</classe>
+                    <propriedades>
+                        <propriedade key="verificaImpAuto">true</propriedade>
+                        <!--propriedade key="cc-verifica-prop-impressao">false</propriedade-->
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+            </atividades>
+            <estagios>
+                <estagio Id="est-scan" capacidade="50" />
+                <estagio Id="est-contingencia" capacidade="100" />
+                <!--estagio Id="est-dpec" capacidade="100"/-->
+                <estagio Id="est-xml" capacidade="100" />
+                <estagio Id="est-lote" capacidade="100" />
+                <estagio Id="est-envio" capacidade="100" delayRetry="15000" />
+                <estagio Id="est-lotecons" capacidade="100" />
+                <estagio Id="est-armazena" capacidade="100" />
+                <estagio Id="est-copiaxmldist-integracao" capacidade="100" />
+                <estagio Id="est-report" capacidade="100" />
+                <estagio Id="est-transfer" capacidade="100" />
+                <estagio Id="est-transfer-cotriba" capacidade="100" />
+                <estagio Id="est-print" capacidade="100" />
+            </estagios>
+            <nodos>
+                <nodo Id="ndo-scannfe" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scannfe</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-scanevento-txt" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>					
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scanevento-txt</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>				
+				
+                <nodo Id="ndo-scanevento-db" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scanevento-db</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>		
+				
+                <!--nodo Id="ndo-scannfe-reenvio" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scannfe-reenvio</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>						
+				
+                <nodo Id="ndo-scaninutilizacao" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scaninutilizacao</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-scaninutilizacao-reenvio" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scaninutilizacao-reenvio</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>					
+
+                <nodo Id="ndo-scanevento-reenvio" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan</estagio-saida>
+                    <atividade>atv-scanevento-reenvio</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo-->
+
+                <nodo Id="ndo-contingencia" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scan</estagio-entrada>
+                    <estagio-saida>est-contingencia</estagio-saida>
+                    <estagio-saida Id="est-armazena">est-armazena</estagio-saida>
+                    <atividade>atv-contingencia</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <!--nodo Id="ndo-dpec" ativo="true" tentativas="5">
+                    <estagio-entrada>est-contingencia</estagio-entrada>
+                    <estagio-saida>est-dpec</estagio-saida>					
+                    <atividade>atv-dpec</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo-->
+
+                <nodo Id="ndo-xml" ativo="true" tentativas="5">
+                    <estagio-entrada>est-contingencia</estagio-entrada>
+                    <estagio-saida>est-xml</estagio-saida>
+                    <atividade>atv-xml</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-lote" ativo="true" tentativas="1">
+                    <estagio-entrada>est-xml</estagio-entrada>
+                    <estagio-saida>est-lote</estagio-saida>
+                    <atividade>atv-lote</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-envio" ativo="true" tentativas="5">
+                    <estagio-entrada>est-lote</estagio-entrada>
+                    <estagio-saida>est-envio</estagio-saida>
+                    <atividade>atv-envio</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-lotecons" ativo="true" tentativas="5">
+                    <estagio-entrada>est-envio</estagio-entrada>
+                    <estagio-saida>est-lotecons</estagio-saida>
+                    <atividade>atv-lotecons</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-armazena" ativo="true" tentativas="1">
+                    <estagio-entrada>est-lotecons</estagio-entrada>
+                    <estagio-saida>est-armazena</estagio-saida>
+                    <atividade>atv-armazena</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-copiaxmldist-integracao" ativo="true" tentativas="1">
+                    <estagio-entrada>est-armazena</estagio-entrada>
+                    <estagio-saida>est-copiaxmldist-integracao</estagio-saida>
+                    <atividade>atv-copiaxmldist-integracao</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-report" ativo="true" tentativas="1">
+                    <!--estagio-entrada>est-armazena</estagio-entrada-->
+                    <estagio-entrada>est-copiaxmldist-integracao</estagio-entrada>
+                    <estagio-saida>est-report</estagio-saida>
+                    <atividade>atv-report</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">6</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-transfer" ativo="true" tentativas="1">
+                    <estagio-entrada>est-report</estagio-entrada>
+                    <estagio-saida>est-transfer</estagio-saida>
+                    <atividade>atv-transfer</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-transfer-cotriba" ativo="true" tentativas="1">
+                    <estagio-entrada>est-transfer</estagio-entrada>
+                    <estagio-saida>est-transfer-cotriba</estagio-saida>
+                    <atividade>atv-transfer-cotriba</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-print" ativo="true" tentativas="1">
+                    <estagio-entrada>est-transfer-cotriba</estagio-entrada>
+                    <atividade>atv-print</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="contingencia-envio" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+            <atividades>
+
+                <!-- atividade de envio de NFes emitidas em contingencia-->
+                <atividade Id="atv-scannfe-cont">
+                    <classe>com.tn3.nfeemissor.job.ScanNFeReenvioDbJob</classe>
+                    <propriedades>
+                        <propriedade key="query">select n from NFe as n
+                            join n.controle as ctr
+                            join n.filial as f
+                            where ctr.reenvio = true
+                            and ctr.contingencia = true
+                            and (n.ideTipoEmissao = '5' or n.ideTipoEmissao = '4')
+                            and f.ativo = true
+                            and f.id =:ownerid
+                            and f.processamentoAtivo = true
+                            and f.uf = (select u from UF as u, Ambiente as a where a.uf = u and a.tipoEmissao = 1 and
+                            a.ativo = true and f.uf = u and f.cfgTipoAmbiente = a.tipo)
+                        </propriedade>
+                        <propriedade key="quantidade">1</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.NFe</propriedade>
+                        <propriedade key="flag">controle.reenvio</propriedade>
+                        <propriedade key="id">id</propriedade>
+                        <propriedade key="usa-xml">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+
+
+
+                <atividade Id="atv-cont-contingencia">
+                    <classe>com.tn3.nfeemissor.job.ContingenciaJob</classe>
+                    <propriedades />
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-cont-xml">
+                    <classe>com.tn3.nfeemissor.job.XmlJob</classe>
+                    <propriedades />
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-cont-lote">
+                    <classe>com.tn3.nfeemissor.job.LoteJob</classe>
+                    <propriedades>
+                        <propriedade key="timeout">3000</propriedade>
+                        <propriedade key="max">3</propriedade>
+                        <propriedade key="timeoutEvento">3000</propriedade>
+                        <propriedade key="maxEvento">3</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-cont-envio">
+                    <classe>com.tn3.nfeemissor.job.LoteEnvioJob</classe>
+                    <propriedades>
+                        <propriedade key="integracao">true</propriedade>
+                        <propriedade key="integraCancelamento">true</propriedade>
+                        <propriedade key="integraInutilizacao">true</propriedade>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-cont-lotecons">
+                    <classe>com.tn3.nfeemissor.job.LoteConsultaJob</classe>
+                    <propriedades>
+                        <propriedade key="erro">diretorioErro</propriedade>
+                        <propriedade key="integracao">true</propriedade>
+                        <propriedade key="reconsultaUltimoRetry">true</propriedade>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                        <propriedade key="integraIndividual">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-cont-armazena">
+                    <classe>com.tn3.nfeemissor.job.ArmazenaJob</classe>
+                    <propriedades>
+                        <propriedade key="usarXmlBeansSave">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+            </atividades>
+            <estagios>
+                <estagio Id="est-cont-scan" capacidade="50" />
+                <estagio Id="est-cont-contingencia" capacidade="100" />
+                <estagio Id="est-cont-xml" capacidade="100" />
+                <estagio Id="est-cont-lote" capacidade="100" />
+                <estagio Id="est-cont-envio" capacidade="100" />
+                <estagio Id="est-cont-lotecons" capacidade="100" />
+                <estagio Id="est-cont-armazena" capacidade="100" />
+            </estagios>
+            <nodos>
+                <!-- nodo de envio de NFes emitidas em contingencia -->
+                <nodo Id="ndo-scannfe-cont" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-cont-scan</estagio-saida>
+                    <atividade>atv-scannfe-cont</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-cont-contingencia" ativo="true" tentativas="1">
+                    <estagio-entrada>est-cont-scan</estagio-entrada>
+                    <estagio-saida>est-cont-contingencia</estagio-saida>
+                    <atividade>atv-cont-contingencia</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-cont-xml" ativo="true" tentativas="5">
+                    <estagio-entrada>est-cont-contingencia</estagio-entrada>
+                    <estagio-saida>est-cont-xml</estagio-saida>
+                    <atividade>atv-cont-xml</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-cont-lote" ativo="true" tentativas="1">
+                    <estagio-entrada>est-cont-xml</estagio-entrada>
+                    <estagio-saida>est-cont-lote</estagio-saida>
+                    <atividade>atv-cont-lote</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-cont-envio" ativo="true" tentativas="5">
+                    <estagio-entrada>est-cont-lote</estagio-entrada>
+                    <estagio-saida>est-cont-envio</estagio-saida>
+                    <atividade>atv-cont-envio</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-cont-lotecons" ativo="true" tentativas="5">
+                    <estagio-entrada>est-cont-envio</estagio-entrada>
+                    <estagio-saida>est-cont-lotecons</estagio-saida>
+                    <atividade>atv-cont-lotecons</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-cont-armazena" ativo="true" tentativas="1">
+                    <estagio-entrada>est-cont-lotecons</estagio-entrada>
+                    <atividade>atv-cont-armazena</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="reconsulta" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+
+            <atividades>
+                <atividade Id="atv-rec-scan">
+                    <!-- novo -->
+                    <classe>com.tn3.nfeemissor.job.ScanNFeReconsultaDbJob</classe>
+                    <propriedades>
+                        <propriedade key="query">
+                            select n from NFe as n
+                            join n.controle as ctr
+                            join n.filial as f
+                            where ctr.reconsulta = true
+                            and f.ativo = true
+                            and f.id =:ownerid
+                            and f.processamentoAtivo = true
+                            and (ctr.dhUltimaConsulta IS NULL or :data > ctr.dhUltimaConsulta)
+                        </propriedade>
+                        <propriedade key="quantidade">5</propriedade>
+                        <propriedade key="tempo">180000</propriedade> <!-- milisegundos -->
+                        <propriedade key="flag">controle.reconsulta</propriedade>
+                        <!--propriedade key="capacidade">30</propriedade-->
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+                <atividade Id="atv-consulta">
+                    <classe>com.tn3.nfeemissor.job.NFeConsJob</classe>
+                    <propriedades>
+                        <propriedade key="erro">diretorioErro</propriedade>
+                        <propriedade key="integracao">true</propriedade>
+                        <propriedade key="notificarFimTentativas">true</propriedade>
+                        <propriedade key="permiteConsWsDiferente">false</propriedade>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                        <!--propriedade key="integracaoBdExterno">true</propriedade-->
+                        <!--propriedade key="tempo-consulta-status-svc">2</propriedade-->
+                        <propriedade key="integracaoTxt">true</propriedade>
+                        <propriedade key="verificarTipoIntegracaoFilial">true</propriedade>
+                        <propriedade key="integraDistribuicaoSoftran">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico"> </programacao>
+                </atividade>
+
+                <atividade Id="atv-rec-armazena">
+                    <classe>com.tn3.nfeemissor.job.ArmazenaJob</classe>
+                    <propriedades>
+                        <!--propriedade key="usarXmlBeansSave">false</propriedade-->
+                        <propriedade key="armazenaArqBinario">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico"> </programacao>
+                </atividade>
+
+                <atividade Id="atv-rec-copiaxmldist-integracao">
+                    <classe>com.tn3.nfeemissor.job.CopiaXmlDistToIntegracaoJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-report">
+                    <classe>com.tn3.nfeemissor.job.ReportJob</classe>
+                    <propriedades>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-transfer">
+                    <classe>com.tn3.nfeemissor.job.TransferJob</classe>
+                    <propriedades>
+                        <propriedade key="dirTransfer">transfer</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-transfer-cotriba">
+                    <classe>com.tn3.nfeemissor.job.TransferCotribaJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+
+                <!-- Impressao -->
+                <atividade Id="atv-print">
+                    <classe>com.tn3.nfeemissor.job.PrintJob</classe>
+                    <propriedades>
+                        <propriedade key="semLogo">false</propriedade>
+                        <propriedade key="verificaImpAuto">false</propriedade>
+                        <propriedade key="psTempoSleepGS">2000</propriedade>
+                        <!--propriedade key="psComandoGS">sobrescreviiiii</propriedade-->
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+            </atividades>
+
+
+            <estagios>
+                <estagio Id="est-rec-scan" capacidade="50" />
+                <estagio Id="est-consulta" capacidade="100" />
+                <estagio Id="est-rec-armazena" capacidade="100" />
+                <estagio Id="est-rec-copiaxmldist-integracao" capacidade="100" />
+                <estagio Id="est-report" capacidade="100" />
+                <estagio Id="est-transfer" capacidade="100" />
+                <estagio Id="est-transfer-cotriba" capacidade="100" />
+                <estagio Id="est-print" capacidade="100" />
+            </estagios>
+
+            <nodos>
+                <nodo Id="ndo-rec-scan" ativo="true" tentativas="5">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-rec-scan</estagio-saida>
+                    <atividade>atv-rec-scan</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-consulta" ativo="true" tentativas="5">
+                    <estagio-entrada>est-rec-scan</estagio-entrada>
+                    <estagio-saida>est-consulta</estagio-saida>
+                    <atividade>atv-consulta</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-rec-armazena" ativo="true" tentativas="1">
+                    <estagio-entrada>est-consulta</estagio-entrada>
+                    <estagio-saida>est-rec-armazena</estagio-saida>
+                    <atividade>atv-rec-armazena</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-rec-copiaxmldist-integracao" ativo="true" tentativas="1">
+                    <estagio-entrada>est-rec-armazena</estagio-entrada>
+                    <estagio-saida>est-rec-copiaxmldist-integracao</estagio-saida>
+                    <atividade>atv-rec-copiaxmldist-integracao</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-report" ativo="true" tentativas="1">
+                    <!--estagio-entrada>est-rec-armazena</estagio-entrada-->
+                    <estagio-entrada>est-rec-copiaxmldist-integracao</estagio-entrada>
+                    <estagio-saida>est-report</estagio-saida>
+                    <atividade>atv-report</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">5</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-transfer" ativo="true" tentativas="1">
+                    <estagio-entrada>est-report</estagio-entrada>
+                    <estagio-saida>est-transfer</estagio-saida>
+                    <atividade>atv-transfer</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-transfer-cotriba" ativo="true" tentativas="1">
+                    <estagio-entrada>est-transfer</estagio-entrada>
+                    <estagio-saida>est-transfer-cotriba</estagio-saida>
+                    <atividade>atv-transfer-cotriba</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-print" ativo="true" tentativas="1">
+                    <estagio-entrada>est-transfer-cotriba</estagio-entrada>
+                    <atividade>atv-print</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="dpec-manual" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-dpecscan">
+                    <classe>com.tn3.nfeemissor.job.ScanXmlDpecJob</classe>
+                    <propriedades>
+                        <propriedade key="entrada">diretorioDpecEntrada</propriedade>
+                        <propriedade key="saida">diretorioDpecEntradaProcessado</propriedade>
+                        <propriedade key="erro">diretorioErro</propriedade>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+                <atividade Id="atv-dpecreport">
+                    <classe>com.tn3.nfeemissor.job.ReportJob</classe>
+                    <propriedades>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-dpectransfer">
+                    <classe>com.tn3.nfeemissor.job.TransferJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-dpecprint">
+                    <classe>com.tn3.nfeemissor.job.PrintJob</classe>
+                    <propriedades>
+                        <propriedade key="verificaImpAuto">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+            </atividades>
+            <estagios>
+                <estagio Id="est-dpecscan" capacidade="50" />
+                <estagio Id="est-dpecreport" capacidade="100" />
+                <estagio Id="est-dpectransfer" capacidade="100" />
+                <estagio Id="est-dpecprint" capacidade="100" />
+            </estagios>
+            <nodos>
+                <nodo Id="ndo-dpecscan" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-dpecscan</estagio-saida>
+                    <atividade>atv-dpecscan</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpecreport" ativo="true" tentativas="1">
+                    <estagio-entrada>est-dpecscan</estagio-entrada>
+                    <estagio-saida>est-dpecreport</estagio-saida>
+                    <atividade>atv-dpecreport</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">6</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpectransfer" ativo="true" tentativas="1">
+                    <estagio-entrada>est-dpecreport</estagio-entrada>
+                    <estagio-saida>est-dpectransfer</estagio-saida>
+                    <atividade>atv-dpectransfer</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpecprint" ativo="true" tentativas="1">
+                    <estagio-entrada>est-dpectransfer</estagio-entrada>
+                    <atividade>atv-dpecprint</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+            </nodos>
+
+        </fluxo>
+
+        <fluxo Id="reconsulta-dpec" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+
+            <atividades>
+                <atividade Id="atv-recdpec-scan">
+                    <classe>com.tn3.nfeemissor.job.ScanDpecDbJob</classe>
+                    <propriedades>
+                        <propriedade key="query">
+                            select d from Dpec as d
+                            join d.controleDpec as ctr
+                            join d.filial as f
+                            where ctr.reconsulta = true
+                            and f.ativo = true
+                            and f.id =:ownerid
+                            and f.processamentoAtivo = true
+                        </propriedade>
+                        <propriedade key="quantidade">5</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.Dpec</propriedade>
+                        <propriedade key="flag">controleDpec.reconsulta</propriedade>
+                        <propriedade key="id">id</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+                <atividade Id="atv-dpec-consulta">
+                    <classe>com.tn3.nfeemissor.job.DpecConsJob</classe>
+                    <propriedades>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico"> </programacao>
+                </atividade>
+
+                <atividade Id="atv-dpec-report">
+                    <classe>com.tn3.nfeemissor.job.ReportJob</classe>
+                    <propriedades>
+                        <propriedade key="integraContingenciaMod2">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+                <atividade Id="atv-dpec-transfer">
+                    <classe>com.tn3.nfeemissor.job.TransferJob</classe>
+                    <propriedades>
+                        <propriedade key="dirTransfer">transfer</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+
+                <!-- Impressao -->
+                <atividade Id="atv-dpec-print">
+                    <classe>com.tn3.nfeemissor.job.PrintJob</classe>
+                    <propriedades>
+                        <propriedade key="semLogo">false</propriedade>
+                        <propriedade key="verificaImpAuto">false</propriedade>
+                        <propriedade key="psTempoSleepGS">2000</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+            </atividades>
+
+
+            <estagios>
+                <estagio Id="est-recdpec-scan" capacidade="50" />
+                <estagio Id="est-dpec-consulta" capacidade="100" />
+                <estagio Id="est-dpec-report" capacidade="100" />
+                <estagio Id="est-dpec-transfer" capacidade="100" />
+                <estagio Id="est-dpec-print" capacidade="100" />
+            </estagios>
+
+            <nodos>
+                <nodo Id="ndo-recdpec-scan" ativo="true" tentativas="5">
+                    <instancias>
+                        <quantidade>1</quantidade>
+                    </instancias>
+                    <!--instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias-->
+                    <estagio-saida>est-recdpec-scan</estagio-saida>
+                    <atividade>atv-recdpec-scan</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpec-consulta" ativo="true" tentativas="5">
+                    <estagio-entrada>est-recdpec-scan</estagio-entrada>
+                    <estagio-saida>est-dpec-consulta</estagio-saida>
+                    <atividade>atv-dpec-consulta</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">2</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpec-report" ativo="true" tentativas="1">
+                    <estagio-entrada>est-dpec-consulta</estagio-entrada>
+                    <estagio-saida>est-dpec-report</estagio-saida>
+                    <atividade>atv-dpec-report</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">3</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpec-transfer" ativo="true" tentativas="1">
+                    <estagio-entrada>est-dpec-report</estagio-entrada>
+                    <estagio-saida>est-dpec-transfer</estagio-saida>
+                    <atividade>atv-dpec-transfer</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-dpec-print" ativo="true" tentativas="1">
+                    <estagio-entrada>est-dpec-transfer</estagio-entrada>
+                    <atividade>atv-dpec-print</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="nfe-status" ativo="false" monitor="false">
+            <instancias>
+                <query limit="1">select m from Matriz m</query>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-status">
+                    <classe>com.tn3.nfeemissor.job.StatusJob</classe>
+                    <propriedades>
+                        <propriedade key="notificar">true</propriedade>
+                        <propriedade key="tempo">15</propriedade>
+                        <propriedade key="emailFromNotificar">envio@tn3.com.br</propriedade>
+                        <!--propriedade key="emailToNotificar">dean@tn3.com.br</propriedade-->
+                    </propriedades>
+                    <!--programacao tipo="cron">
+                        <valor>0 0/3 * * * ?</valor>
+                    </programacao-->
+                    <programacao tipo="simples">
+                        <valor>120000</valor>
+                    </programacao>
+                </atividade>
+            </atividades>
+            <estagios />
+            <nodos>
+                <nodo Id="ndo-checkstatus" ativo="true" tentativas="1">
+                    <atividade>atv-status</atividade>
+                    <propriedades />
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="reimpressao" ativo="false" monitor="false">
+            <instancias>
+                <query>select f from Filial f where f.ativo = true</query>
+            </instancias>
+            <atividades>
+
+                <atividade Id="atv-scannfe-reimp">
+                    <classe>com.tn3.nfeemissor.job.ScanReimpressaoDbJob</classe>
+                    <propriedades>
+                        <propriedade key="query">select r from Reimpressao as r join
+                            r.filial as f where r.processado = false and f.ativo = true and f.id
+                            =:ownerid and f.processamentoAtivo = true</propriedade>
+                        <propriedade key="quantidade">1</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.Reimpressao</propriedade>
+                        <propriedade key="flag">processado</propriedade>
+                        <propriedade key="id">id</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+
+                <atividade Id="atv-transfer">
+                    <classe>com.tn3.nfeemissor.job.TransferJob</classe>
+                    <propriedades>
+                        <propriedade key="dirTransfer">transfer</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+
+
+                <atividade Id="atv-print">
+                    <classe>com.tn3.nfeemissor.job.PrintJob</classe>
+                    <propriedades>
+                        <propriedade key="verificaImpAuto">false</propriedade>
+                        <propriedade key="semLogo">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+            </atividades>
+
+            <estagios>
+                <estagio Id="est-scannfe-reimp" capacidade="20" />
+                <estagio Id="est-transfer" capacidade="100" />
+                <estagio Id="est-print" capacidade="20" />
+            </estagios>
+
+            <nodos>
+                <nodo Id="ndo-scannfe-reimp" ativo="true" tentativas="1">
+                    <estagio-saida>est-scannfe-reimp</estagio-saida>
+                    <atividade>atv-scannfe-reimp</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+
+
+                <nodo Id="ndo-transfer" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scannfe-reimp</estagio-entrada>
+                    <estagio-saida>est-transfer</estagio-saida>
+                    <atividade>atv-transfer</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+
+                <nodo Id="ndo-print" ativo="true" tentativas="1">
+                    <estagio-entrada>est-transfer</estagio-entrada>
+                    <atividade>atv-print</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="nfe-licenca" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-licenca">
+                    <classe>com.tn3.nfeemissor.job.LicencaUsoJob</classe>
+                    <propriedades />
+                    <programacao tipo="simples">
+                        <valor>432000000</valor>
+                    </programacao>
+                    <!--programacao tipo="cron">
+                        <valor>0 0/3 * * * ?</valor>
+                    </programacao-->
+                </atividade>
+            </atividades>
+            <estagios />
+            <nodos>
+                <nodo Id="ndo-licanca" ativo="true" tentativas="1">
+                    <atividade>atv-licenca</atividade>
+                    <propriedades />
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="envio-email-dist" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+            <atividades>
+
+                <atividade Id="atv-scannfe-dist">
+                    <classe>com.tn3.nfeemissor.job.ScanNFeDbJob</classe> <!--  and ctr.cancelado = false -->
+                    <propriedades>
+                        <propriedade key="query">select c from NFe as c join c.controle as ctr join c.filial as f
+                            where ctr.emailArqDistEnvioProces = false and ctr.emailArqDistEnviado = false and
+                            ctr.autorizada = true
+                            and ctr.falha = false and ctr.arquivoDistribuicao IS NOT NULL and ctr.arquivoPDF IS NOT NULL
+                            and f.ativo = true and f.id =:ownerid and f.processamentoAtivo = true
+                            and ctr.dhProcessando IS NULL</propriedade>
+                        <propriedade key="quantidade">5</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.NFe</propriedade>
+                        <propriedade key="flag">controle.emailArqDistEnvioProces</propriedade>
+                        <propriedade key="id">id</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+
+                <!--atividade Id="atv-scancanc-dist">
+						<classe>com.tn3.cteemissor.job.ScanCTeEmailCancJob</classe>
+						<propriedades>
+							<propriedade key="query">select c from CTe as c join c.controle as ctr join c.filial as f 
+								where ctr.emailArqDistCancEnvioProces = false and ctr.emailArqDistCancEnviado = false and ctr.autorizado = true and ctr.cancelado = true
+								and ctr.falha = false and ctr.arquivoDistribuicaoCancelamento IS NOT NULL							
+								and f.ativo = true and f.id =:ownerid and f.processamentoAtivo = true 
+								and ctr.dhProcessando IS NULL</propriedade>
+							<propriedade key="quantidade">1</propriedade>
+							<propriedade key="classe">com.tn3.ctecore.modelo.CTe</propriedade>
+							<propriedade key="flag">controle.emailArqDistCancEnvioProces</propriedade>
+							<propriedade key="id">id</propriedade>
+						</propriedades>
+						<programacao tipo="simples">
+							<valor>10000</valor>
+						</programacao>
+					</atividade-->
+
+                <atividade Id="atv-scanevent-dist">
+                    <classe>com.tn3.nfeemissor.job.ScanEventoEmailJob</classe>
+                    <propriedades>
+                        <propriedade key="query">
+                            select e from EventoReq as e
+                            join e.filial as f
+                            where f.ativo = true
+                            and f.id =:ownerid
+                            and f.processamentoAtivo = true
+                            and e.falha = false
+                            and e.aprovado = true
+                            and e.emailArqDistEventEnviado = false
+                            and e.emailArqDistEventEnvioProces = false
+                            and (
+                            (e.caminhoPdf IS NOT NULL and e.tipoEvento = 110110) or (e.arquivoDistribuicao IS NOT NULL
+                            and (e.tipoEvento = 110111 or e.tipoEvento = 110140))
+                            )
+                        </propriedade>
+                        <propriedade key="quantidade">1</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.EventoReq</propriedade>
+                        <propriedade key="flag">emailArqDistEventEnvioProces</propriedade>
+                        <propriedade key="id">id</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>180000</valor>
+                    </programacao>
+                </atividade>
+
+                <atividade Id="atv-email">
+                    <classe>com.tn3.nfeemissor.job.EnvioEmailJob</classe>
+                    <propriedades>
+                        <propriedade key="buscar-email-por-filial">false</propriedade>
+                        <!-- Conexao Banco Externo SQLServer -->
+                        <propriedade key="con-conexao-externa">false</propriedade>
+                        <propriedade key="con-driver">com.mysql.jdbc.Driver</propriedade>
+                        <propriedade key="con-url">jdbc:mysql://localhost:3306/emailteste</propriedade>
+                        <propriedade key="con-usuario">root</propriedade>
+                        <propriedade key="con-senha">tn3</propriedade>
+                        <!-- O sql trata para completar com zeros a esquerda, pois o banco da panex trabalha assim -->
+                        <propriedade key="con-query">SELECT CLI_EMAIL FROM tab_cliente WHERE CLI_CNPJ = :valorParametro
+                        </propriedade>
+                        <propriedade key="con-parametro-numerico">false</propriedade>
+                        <propriedade key="con-campo-email">CLI_EMAIL</propriedade>
+                        <propriedade key="reenviar-email-erro">true</propriedade>
+
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+            </atividades>
+
+            <estagios>
+                <estagio Id="est-scan-email" capacidade="20" />
+                <estagio Id="est-email" capacidade="100" />
+            </estagios>
+
+            <nodos>
+                <nodo Id="ndo-scannfe-dist" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan-email</estagio-saida>
+                    <atividade>atv-scannfe-dist</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <!--nodo Id="ndo-scancanc-dist" ativo="true" tentativas="1">
+					<instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>				
+                    <estagio-saida>est-scan-email</estagio-saida>
+                    <atividade>atv-scancanc-dist</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo-->
+
+                <nodo Id="ndo-scanevent-dist" ativo="true" tentativas="1">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-scan-email</estagio-saida>
+                    <atividade>atv-scanevent-dist</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-email" ativo="true" tentativas="5">
+                    <estagio-entrada>est-scan-email</estagio-entrada>
+                    <atividade>atv-email</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="envio-email-zip" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+
+                <atividade Id="atv-scan-req">
+                    <classe>com.tn3.nfeemissor.job.ScanEnvioEmailReqJob</classe>
+                    <propriedades>
+                        <propriedade key="query">select e from EnvioEmailReq as e
+                            where e.processado = false
+                        </propriedade>
+                        <propriedade key="quantidade">1</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.EnvioEmailReq</propriedade>
+                        <propriedade key="flag">processado</propriedade>
+                        <propriedade key="id">id</propriedade>
+                        <propriedade key="qtdMaxFile">5</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>30000</valor>
+                    </programacao>
+                </atividade>
+
+
+                <atividade Id="atv-envio-zip">
+                    <classe>com.tn3.nfeemissor.job.EnvioEmailZipJob</classe>
+                    <propriedades />
+                    <programacao tipo="unico" />
+                </atividade>
+
+            </atividades>
+
+            <estagios>
+                <estagio Id="est-scan-req" capacidade="20" />
+                <estagio Id="est-envio-zip" capacidade="40" />
+            </estagios>
+
+            <nodos>
+                <nodo Id="ndo-scan-req" ativo="true" tentativas="1">
+                    <estagio-saida>est-scan-req</estagio-saida>
+                    <atividade>atv-scan-req</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-envio-zip" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scan-req</estagio-entrada>
+                    <atividade>atv-envio-zip</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="limpeza" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-limpeza">
+                    <classe>com.tn3.nfeemissor.job.LimpezaJob</classe>
+                    <propriedades>
+                        <propriedade key="limparLogs">true</propriedade>
+                        <propriedade key="qtdDiasLogs">90</propriedade>
+                        <propriedade key="limparNfeHistorico">true</propriedade>
+                        <propriedade key="qtdDiasNfeHistorico">90</propriedade>
+                        <propriedade key="limparNfeHistoricoInut">true</propriedade>
+                        <propriedade key="qtdDiasNfeHistoricoInut">90</propriedade>
+                        <propriedade key="limparNfeHistoricoArquivo">true</propriedade>
+                        <propriedade key="qtdDiasNfeHistoricoArquivo">90</propriedade>
+                        <propriedade key="limparNfeStatusWs">true</propriedade>
+                        <propriedade key="qtdDiasNfeStatusWs">90</propriedade>
+                        <propriedade key="limparDirProcessado">true</propriedade>
+                        <propriedade key="qtdDiasDirProcessado">90</propriedade>
+                        <propriedade key="limparDirHistoricoSoftran">true</propriedade>
+                        <propriedade key="qtdDiasDirHistoricoSoftran">90</propriedade>
+                        <propriedade key="nomeDirHistoricoSoftran">historico</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>30000</valor>
+                    </programacao>
+                </atividade>
+            </atividades>
+            <estagios />
+            <nodos>
+                <nodo Id="ndo-limpeza" ativo="true" tentativas="1">
+                    <atividade>atv-limpeza</atividade>
+                    <propriedades />
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="regera-pdf-cc" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-scanevento-regera-pdf">
+                    <classe>com.tn3.nfeemissor.job.ScanEventoDbGenericoJob</classe>
+                    <propriedades>
+                        <propriedade key="query">
+                            select e from EventoReq as e
+                            join e.filial as f
+                            where e.regerarPdf = true
+                            and e.aprovado = true
+                            and e.tipoEvento = 110110
+                            and f.ativo = true
+                            and f.processamentoAtivo = true
+                            and f.uf = (select u from UF as u, Ambiente as a where a.uf = u and a.ativo = true and a.id
+                            =:ownerid and f.uf = u)
+                            order by e.id
+                        </propriedade>
+                        <propriedade key="quantidade">3</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.EventoReq</propriedade>
+                        <propriedade key="flag">regerarPdf</propriedade>
+                        <propriedade key="id">id</propriedade>
+                        <propriedade key="usa-xml">false</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+                <atividade Id="atv-report-regera-pdf">
+                    <classe>com.tn3.nfeemissor.job.ReportJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-transfer-regera-pdf">
+                    <classe>com.tn3.nfeemissor.job.TransferJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+                <atividade Id="atv-print-regera-pdf">
+                    <classe>com.tn3.nfeemissor.job.PrintJob</classe>
+                    <propriedades>
+                        <propriedade key="verificaImpAuto">true</propriedade>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+            </atividades>
+            <estagios>
+                <estagio Id="est-scan-regera-pdf" capacidade="50" />
+                <estagio Id="est-report-regera-pdf" capacidade="100" />
+                <estagio Id="est-transfer-regera-pdf" capacidade="100" />
+                <estagio Id="est-print-regera-pdf" capacidade="100" />
+            </estagios>
+            <nodos>
+                <nodo Id="ndo-scanevento-db" ativo="true" tentativas="1">
+                    <instancias>
+                        <quantidade>1</quantidade>
+                    </instancias>
+                    <estagio-saida>est-scan-regera-pdf</estagio-saida>
+                    <atividade>atv-scanevento-regera-pdf</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-report-regera-pdf" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scan-regera-pdf</estagio-entrada>
+                    <estagio-saida>est-report-regera-pdf</estagio-saida>
+                    <atividade>atv-report-regera-pdf</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">2</propriedade>
+                    </propriedades>
+                </nodo>
+
+                <nodo Id="ndo-transfer-regera-pdf" ativo="true" tentativas="1">
+                    <estagio-entrada>est-report-regera-pdf</estagio-entrada>
+                    <estagio-saida>est-transfer-regera-pdf</estagio-saida>
+                    <atividade>atv-transfer-regera-pdf</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-print-regera-pdf" ativo="true" tentativas="1">
+                    <estagio-entrada>est-transfer-regera-pdf</estagio-entrada>
+                    <atividade>atv-print-regera-pdf</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <!-- estou usando a configuracao do conversor em um arquivo separado... -->
+
+        <!--fluxo Id="processa-conversor" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-scannfe-convnfe">
+                    <classe>com.tn3.nfeconversor.job.ScanNFeJob</classe>
+					<propriedades>
+						<propriedade key = "quantidade">10</propriedade>						
+                    </propriedades>					
+                    <programacao tipo="simples">
+                        <valor>5000</valor>
+                    </programacao>                    
+                </atividade>
+				
+                <atividade Id="atv-conversor-convnfe">
+                    <classe>com.tn3.nfeconversor.job.ConversorJob</classe>
+					<propriedades></propriedades>					
+                   <programacao tipo="unico"/>                   
+                </atividade>				
+				
+            </atividades>
+            
+			<estagios>
+                <estagio Id="est-scannfe-convnfe" capacidade="200"/>
+                <estagio Id="est-conversor-convnfe" capacidade="300"/>
+            </estagios>
+            
+			<nodos>
+			
+                <nodo Id="ndo-scannfe-convnfe" ativo="true" tentativas="1">					
+                    <estagio-saida>est-scannfe-convnfe</estagio-saida>
+                    <atividade>atv-scannfe-convnfe</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+				
+                <nodo Id="ndo-conversor-convnfe" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scannfe-convnfe</estagio-entrada>                   
+                    <atividade>atv-conversor-convnfe</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">5</propriedade>
+                    </propriedades>
+                </nodo>						
+				
+            </nodos>
+        </fluxo>	
+
+		<fluxo Id="processa-conversor-canc" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-scancanc-convcanc">
+                    <classe>com.tn3.nfeconversor.job.ScanCancelamentoJob</classe>
+					<propriedades>
+						<propriedade key = "quantidade">5</propriedade>
+                    </propriedades>					
+                    <programacao tipo="simples">
+                        <valor>5000</valor>
+                    </programacao>                    
+                </atividade>
+            
+			
+				<atividade Id="atv-conversor-convcanc">
+						<classe>com.tn3.nfeconversor.job.ConversorJob</classe>
+						<propriedades></propriedades>					
+					   <programacao tipo="unico"/>                   
+				</atividade>							
+			</atividades>
+			<estagios>
+                <estagio Id="est-scancanc-convcanc" capacidade="200"/>
+                <estagio Id="est-conversor-convcanc" capacidade="300"/>
+            </estagios>
+			
+            <nodos>
+				
+                <nodo Id="ndo-scancanc-convcanc" ativo="true" tentativas="1">					
+                    <estagio-saida>est-scancanc-convcanc</estagio-saida>
+                    <atividade>atv-scancanc-convcanc</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>				
+				
+                <nodo Id="ndo-conversor-convcanc" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scancanc-convcanc</estagio-entrada>                   
+                    <atividade>atv-conversor-convcanc</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>						
+				
+            </nodos>
+        </fluxo>	
+
+		<fluxo Id="processa-conversor-evento" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-scaneve-conveve">
+                    <classe>com.tn3.nfeconversor.job.ScanEventoJob</classe>
+					<propriedades>
+						<propriedade key = "quantidade">5</propriedade>						
+                    </propriedades>					
+                    <programacao tipo="simples">
+                        <valor>5000</valor>
+                    </programacao>                    
+                </atividade>
+
+				<atividade Id="atv-conversor-conveve">
+						<classe>com.tn3.nfeconversor.job.ConversorJob</classe>
+						<propriedades></propriedades>					
+					   <programacao tipo="unico"/>                   
+				</atividade>					
+				
+            </atividades>
+
+			<estagios>
+                <estagio Id="est-scaneve-conveve" capacidade="200"/>
+                <estagio Id="est-conversor-conveve" capacidade="300"/>
+            </estagios>			
+			
+            <nodos>
+				
+                <nodo Id="ndo-scaneve-conveve" ativo="true" tentativas="1">					
+                    <estagio-saida>est-scaneve-conveve</estagio-saida>
+                    <atividade>atv-scaneve-conveve</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>					
+				
+                <nodo Id="ndo-conversor-conveve" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scaneve-conveve</estagio-entrada>                   
+                    <atividade>atv-conversor-conveve</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>					
+				
+            </nodos>
+        </fluxo>		
+		
+		<fluxo Id="processa-conversor-inut" ativo="false" monitor="false">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-scaninut-convinut">
+                    <classe>com.tn3.nfeconversor.job.ScanInutilizacaoJob</classe>
+					<propriedades>
+						<propriedade key = "quantidade">5</propriedade>
+                    </propriedades>					
+                    <programacao tipo="simples">
+                        <valor>5000</valor>
+                    </programacao>                    
+                </atividade>
+				
+
+				<atividade Id="atv-conversor-convinut">
+						<classe>com.tn3.nfeconversor.job.ConversorJob</classe>
+						<propriedades></propriedades>					
+					   <programacao tipo="unico"/>                   
+				</atividade>					
+				
+            </atividades>
+
+			<estagios>
+                <estagio Id="est-scaninut-convinut" capacidade="200"/>
+                <estagio Id="est-conversor-convinut" capacidade="300"/>
+            </estagios>				
+			
+            <nodos>				
+                <nodo Id="ndo-scaninut-convinut" ativo="true" tentativas="1">					
+                    <estagio-saida>est-scaninut-convinut</estagio-saida>
+                    <atividade>atv-scaninut-convinut</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>					
+
+                <nodo Id="ndo-conversor-convinut" ativo="true" tentativas="1">
+                    <estagio-entrada>est-scaninut-convinut</estagio-entrada>                   
+                    <atividade>atv-conversor-convinut</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">1</propriedade>
+                    </propriedades>
+                </nodo>					
+				
+            </nodos>
+        </fluxo-->
+
+
+        <!--
+		Alters BD 		
+		ALTER TABLE `TNFE_HEADER` ADD COLUMN `STATUS_CONVERSOR` INT NOT NULL DEFAULT 0  AFTER `FIL_CODIGO` ;
+		ALTER TABLE `TNFE_HEADER` ADD COLUMN `MSG_CONVERSOR` VARCHAR(4000) AFTER `STATUS_CONVERSOR` ;
+		ALTER TABLE `TNFE_HEADER` ADD INDEX `IDX_STATUS_CONV` (`STATUS_CONVERSOR` ASC) ;		
+		
+		
+		ALTER TABLE `NFE_CANCELAMENTO` ADD COLUMN `STATUS_CONVERSOR` INT NOT NULL DEFAULT 0;
+		ALTER TABLE `NFE_CANCELAMENTO` ADD COLUMN `MSG_CONVERSOR` VARCHAR(4000) AFTER `STATUS_CONVERSOR` ;
+		ALTER TABLE `NFE_CANCELAMENTO` ADD INDEX `IDX_STATUS_CONV_CANC` (`STATUS_CONVERSOR` ASC) ;		
+		
+		ALTER TABLE `TNFE_EVENTO` ADD COLUMN `STATUS_CONVERSOR` INT NOT NULL DEFAULT 0;
+		ALTER TABLE `TNFE_EVENTO` ADD COLUMN `MSG_CONVERSOR` VARCHAR(4000) AFTER `STATUS_CONVERSOR` ;
+		ALTER TABLE `TNFE_EVENTO` ADD INDEX `IDX_STATUS_CONV_EVEN` (`STATUS_CONVERSOR` ASC) ;		
+		
+		ALTER TABLE `NFE_INUTILIZACAO` ADD COLUMN `STATUS_CONVERSOR` INT NOT NULL DEFAULT 0;
+		ALTER TABLE `NFE_INUTILIZACAO` ADD COLUMN `MSG_CONVERSOR` VARCHAR(4000) AFTER `STATUS_CONVERSOR` ;	
+		ALTER TABLE `NFE_INUTILIZACAO` ADD INDEX `IDX_STATUS_CONV_INUT` (`STATUS_CONVERSOR` ASC) ;		
+		
+		-->
+        
+        <fluxo Id="nfe-relatorio-emissao" ativo="false" monitor="false">
+            <!--instancias>
+				<query>select m from Matriz m</query>
+			</instancias-->
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-relatorio">
+                    <classe>com.tn3.nfeemissor.job.RelatorioEmissaoJob</classe>
+                    <propriedades>
+                        <propriedade key="emailRelatorioEmissao">fernanda@tn3.com.br</propriedade>
+                        <propriedade key="emailRelatorioEmissaoFrom">envio@tn3.com.br</propriedade>
+                        <propriedade key="diaMesAnterior">20</propriedade>
+                        <propriedade key="diaMesAtual">21</propriedade>
+                    </propriedades>
+                    <!--programacao tipo="cron">
+					<valor>0 00 03 22 * ?</valor>
+					</programacao-->
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+            </atividades>
+            <estagios />
+            <nodos>
+                <nodo Id="ndo-relatorio" ativo="true" tentativas="1">
+                    <atividade>atv-relatorio</atividade>
+                    <propriedades />
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="integracaoArquivo" ativo="false" monitor="false">
+            <instancias>
+                <query limit="1">select m from Matriz m</query>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-integracao">
+                    <classe>com.tn3.nfeemissor.job.IntegracaoArquivosJob</classe>
+                    <propriedades>
+                        <propriedade key="urlLer">F:\tn3nfe\integra\ler</propriedade>
+                        <propriedade key="urlEventoLer">F:\tn3nfe\integra\lerevento</propriedade>
+                        <propriedade key="urlMover">F:\tn3nfe\integra\arquivosmover</propriedade>
+                        <propriedade key="urlError">F:\tn3nfe\integra\arquivoserror</propriedade>
+                        <propriedade key="urlCancLer">F:\tn3nfe\integra\arquivoslercanc</propriedade>
+                        <propriedade key="idFilial">1</propriedade>
+                        <propriedade key="strInicioArquivo">
+                            <![CDATA[<nfeProc versao=]]>
+                        </propriedade>
+                    </propriedades>
+                    <!--programacao tipo="cron">
+			  <valor>0/20 ?</valor>       
+			 </programacao -->
+                    <programacao tipo="simples">
+                        <valor>2000</valor> <!-- 5 dias -->
+                    </programacao>
+                </atividade>
+            </atividades>
+            <estagios />
+            <nodos>
+                <nodo Id="ndo-integracao" ativo="true" tentativas="1">
+                    <atividade>atv-integracao</atividade>
+                    <propriedades />
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="gera-pdf-suporte" ativo="false" monitor="false">
+            <instancias>
+                <query>select a from Ambiente a where a.ativo = true</query>
+            </instancias>
+
+            <atividades>
+                <atividade Id="atv-rec-scan">
+                    <classe>com.tn3.nfeemissor.job.ScanNFeDbJob</classe>
+                    <propriedades>
+                        <propriedade key="query">
+                            select c from NFe as c
+                            join c.controle as ctr
+                            join c.filial as f
+                            where ctr.suporte = true
+                            and f.ativo = true
+                            and f.id =:ownerid
+                            and f.processamentoAtivo = true</propriedade>
+                        <propriedade key="quantidade">50</propriedade>
+                        <propriedade key="classe">com.tn3.nfecore.modelo.NFe</propriedade>
+                        <propriedade key="flag">controle.suporte</propriedade>
+                        <propriedade key="id">id</propriedade>
+                    </propriedades>
+                    <programacao tipo="simples">
+                        <valor>10000</valor>
+                    </programacao>
+                </atividade>
+                <atividade Id="atv-report">
+                    <classe>com.tn3.nfeemissor.job.ReportJob</classe>
+                    <propriedades>
+                    </propriedades>
+                    <programacao tipo="unico" />
+                </atividade>
+            </atividades>
+
+
+            <estagios>
+                <estagio Id="est-rec-scan" capacidade="50" />
+                <estagio Id="est-report" capacidade="250" />
+            </estagios>
+
+            <nodos>
+                <nodo Id="ndo-rec-scan" ativo="true" tentativas="5">
+                    <instancias>
+                        <query>select f from Filial f inner join f.uf uf, Ambiente amb where f.ativo
+                            = true and uf = amb.uf and amb.id = :ownerid</query>
+                    </instancias>
+                    <estagio-saida>est-rec-scan</estagio-saida>
+                    <atividade>atv-rec-scan</atividade>
+                    <propriedades>
+                        <propriedade key="qtd">1</propriedade>
+                    </propriedades>
+                </nodo>
+                <nodo Id="ndo-report" ativo="true" tentativas="1">
+                    <estagio-entrada>est-rec-scan</estagio-entrada>
+                    <atividade>atv-report</atividade>
+                    <propriedades>
+                        <propriedade key="quantidade">10</propriedade>
+                    </propriedades>
+                </nodo>
+            </nodos>
+        </fluxo>
+
+        <fluxo Id="nfe-impressoras-ativas" ativo="false" monitor="true">
+            <instancias>
+                <quantidade>1</quantidade>
+            </instancias>
+            <atividades>
+                <atividade Id="atv-imp-ativa">
+                    <classe>com.tn3.nfeemissor.job.ImpressorasAtivasJob</classe>
+                    <propriedades />
+                    <!--programacao tipo="cron">
+                        <valor>0 0/5 * * * ?</valor>
+                    </programacao-->
+                    <programacao tipo="simples">
+                        <valor>120000</valor>
+                    </programacao>
+                </atividade>
+            </atividades>
+            <estagios />
+            <nodos>
+                <nodo Id="ndo-imp-ativa" ativo="true" tentativas="1">
+                    <atividade>atv-imp-ativa</atividade>
+                    <propriedades />
+                </nodo>
+            </nodos>
+        </fluxo>
+
+    </fluxos>
+</emissor>

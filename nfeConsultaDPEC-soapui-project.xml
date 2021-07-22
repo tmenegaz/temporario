@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="nfeConsultaDPEC" resourceRoot="" soapui-version="3.6.1" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SCEConsultaRFBSoap" type="wsdl" bindingName="{http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB}SCEConsultaRFBSoap" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/tn3/Desktop/nfeConsultaDPEC.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://www.nfe.fazenda.gov.br/SCEConsultaRFB/SCEConsultaRFB.asmx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB/sceConsultaDPEC" name="sceConsultaDPEC" bindingOperationName="sceConsultaDPEC" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://www.nfe.fazenda.gov.br/SCEConsultaRFB/SCEConsultaRFB.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:scec="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB">
+   <soapenv:Header>
+      <scec:sceCabecMsg>
+         <!--Optional:-->
+         <scec:versaoDados>?</scec:versaoDados>
+      </scec:sceCabecMsg>
+   </soapenv:Header>
+   <soapenv:Body>
+      <scec:sceDadosMsg>
+         e
+         <!--You may enter ANY elements at this point-->
+         gero
+      </scec:sceDadosMsg>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB/sceConsultaDPEC"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SCEConsultaRFBSoap12" type="wsdl" bindingName="{http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB}SCEConsultaRFBSoap12" soapVersion="1_2" anonymous="optional" definition="file:/C:/Users/tn3/Desktop/nfeConsultaDPEC.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/tn3/Desktop/nfeConsultaDPEC.wsdl"><con:part><con:url>file:/C:/Users/tn3/Desktop/nfeConsultaDPEC.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB">
+      <s:element name="sceDadosMsg">
+        <s:complexType mixed="true">
+          <s:sequence>
+            <s:any/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sceConsultaDPECResult">
+        <s:complexType mixed="true">
+          <s:sequence>
+            <s:any/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sceCabecMsg" type="tns:sceCabecMsg"/>
+      <s:complexType name="sceCabecMsg">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="versaoDados" type="s:string"/>
+        </s:sequence>
+        <s:anyAttribute/>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="sceConsultaDPECSoapIn">
+    <wsdl:part name="sceDadosMsg" element="tns:sceDadosMsg"/>
+  </wsdl:message>
+  <wsdl:message name="sceConsultaDPECSoapOut">
+    <wsdl:part name="sceConsultaDPECResult" element="tns:sceConsultaDPECResult"/>
+  </wsdl:message>
+  <wsdl:message name="sceConsultaDPECsceCabecMsg">
+    <wsdl:part name="sceCabecMsg" element="tns:sceCabecMsg"/>
+  </wsdl:message>
+  <wsdl:portType name="SCEConsultaRFBSoap">
+    <wsdl:operation name="sceConsultaDPEC">
+      <wsdl:input message="tns:sceConsultaDPECSoapIn"/>
+      <wsdl:output message="tns:sceConsultaDPECSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SCEConsultaRFBSoap" type="tns:SCEConsultaRFBSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sceConsultaDPEC">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB/sceConsultaDPEC" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:sceConsultaDPECsceCabecMsg" part="sceCabecMsg" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:sceConsultaDPECsceCabecMsg" part="sceCabecMsg" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SCEConsultaRFBSoap12" type="tns:SCEConsultaRFBSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sceConsultaDPEC">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB/sceConsultaDPEC" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:sceConsultaDPECsceCabecMsg" part="sceCabecMsg" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:sceConsultaDPECsceCabecMsg" part="sceCabecMsg" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SCEConsultaRFB">
+    <wsdl:port name="SCEConsultaRFBSoap" binding="tns:SCEConsultaRFBSoap">
+      <soap:address location="https://www.nfe.fazenda.gov.br/SCEConsultaRFB/SCEConsultaRFB.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="SCEConsultaRFBSoap12" binding="tns:SCEConsultaRFBSoap12">
+      <soap12:address location="https://www.nfe.fazenda.gov.br/SCEConsultaRFB/SCEConsultaRFB.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://hom.nfe.fazenda.gov.br/SCEConsultaRFB/SCEConsultaRFB.asmx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB/sceConsultaDPEC" name="sceConsultaDPEC" bindingOperationName="sceConsultaDPEC" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://hom.nfe.fazenda.gov.br/SCEConsultaRFB/SCEConsultaRFB.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:scec="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB">
+   <soap:Header>
+      <scec:sceCabecMsg>
+         <!--Optional:-->
+         <scec:versaoDados>1.01</scec:versaoDados>
+      </scec:sceCabecMsg>
+   </soap:Header>
+   <soap:Body>
+      <scec:sceDadosMsg>
+        <consDPEC xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01"><tpAmb>2</tpAmb><verAplic>v2.00a</verAplic><nRegDPEC>914000001661084</nRegDPEC></consDPEC>
+      </scec:sceDadosMsg>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.portalfiscal.inf.br/nfe/wsdl/SCEConsultaRFB/SCEConsultaRFBSoap/sceConsultaDPECRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
