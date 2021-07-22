@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "./aplicacao/nfecliente"
+		}
+	],
+	"settings": {
+		"sqltools.connections": []
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "java",
+				"name": "Launch AppMain",
+				"request": "launch",
+				"mainClass": "com.tn3.nfeemissor.app.AppMain",
+				"projectName": "nfeemissor-app",
+				"cwd": "/home/tmenegaz/workspace/NFe/estrutura/tn3nfe",
+				"vmArgs": [
+					"-Dconfig=file:///home/tmenegaz/workspace/NFe/estrutura/tn3nfe/conf/application.properties",
+					"-Dlog4j.configuration=file:///home/tmenegaz/workspace/NFe/estrutura/tn3nfe/conf/log4j.properties",
+					"-Dhttps.protocols='TLSv1.1,TLSv1.2'",
+					"-Duser.timezone=Etc/GMT+3"
+				]
+			},
+		]
+	}
+}
